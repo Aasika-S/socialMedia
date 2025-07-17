@@ -1,0 +1,81 @@
+.messenger{
+    height:calc(100vh - 70px);
+    display: flex;
+}
+.chatmenu{
+    flex: 3.5;
+}
+.chatbox{
+    flex: 5.5;
+}
+.chatonline{
+    flex: 3;
+}
+.chatboxwrap{
+    display: flex;
+    flex-direction: column; 
+    position: relative;
+}
+.chatboxtop{
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 10px;  
+}
+.chatmenuwrap,.chatboxwrap,.chatonlinewrap{
+    padding: 10px;
+    height: 100%;
+}
+.chatmenuinput{
+    width: 90%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+.chatboxbottom{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chatmessageinput{
+    width: 80%;
+    height: 90px;
+    padding: 10px;
+}
+.chatsubmitbtn{
+    width: 70px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: teal;
+    color: white;
+}
+.noconv{
+    position: absolute;
+    top: 10%;
+    font-style: 50px;
+    color: gray;
+    cursor: default;
+}
+.messengerSidebarItemImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+.messengerSidebarItem{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.messengerSidebarItem:hover {
+    background-color: #f5f5f5; 
+  }
+  
+  .messengerSidebarItem.selected {
+    background-color: #e0e0e0; 
+  }

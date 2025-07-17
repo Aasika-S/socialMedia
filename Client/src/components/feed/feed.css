@@ -1,0 +1,7 @@
+.feed{
+    /* can use width =some% as well */
+    flex: 5.5;
+}
+.feedwrap{
+    padding: 20px;
+}
