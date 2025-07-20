@@ -29,7 +29,12 @@ mongoose
   //middleware
   app.use(express.json())
   app.use(helmet())
-  app.use(cors())
+  app.use(cors(
+    {
+      origin:process.env.REACT_APP_MAIN_SERVER,
+      credentials:true
+    }
+  ))
   app.use(morgan("common"))
   app.use("/api/users",userRoute)
   app.use("/api/auth",authRoute)
