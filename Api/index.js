@@ -70,6 +70,8 @@ mongoose
   })
 
 
-app.listen(process.env.REACT_APP_SERVER_PORT,()=>{
+const PORT = process.env.REACT_APP_SERVER_PORT || 8800;
+  
+app.listen(PORT,()=>{
     console.log("Backend server running")
 })

@@ -2,7 +2,8 @@ const {Server}=require('socket.io');
 const dotenv = require("dotenv");
 dotenv.config()
 
-const io = new Server(process.env.REACT_APP_SOCKET_PORT, {
+const PORT = process.env.REACT_APP_SOCKET_PORT || 8900;
+const io = new Server(PORT, {
   cors: {
     origin: process.env.REACT_APP_MAIN_SERVER,
   },
