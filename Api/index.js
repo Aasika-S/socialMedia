@@ -8,6 +8,8 @@ const helmet= require('helmet')
 const morgan= require('morgan')
 const mongodb=require('mongodb')
 const multer=require("multer")
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
 const path=require("path")
 
 
@@ -19,17 +21,18 @@ const messageRoute=require("./routes/messages.js")
 
 dotenv.config()
 console.log("hi")
+
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("connected to DB"))
   .catch((e) => console.log(e));
-
-  app.use("/images",cors(
-    {
-      origin:process.env.REACT_APP_MAIN_SERVER,
-      credentials:true
-    }
-  ),express.static(path.join(__dirname,"public/images")))
 
   //middleware
   app.use(express.json())
@@ -48,19 +51,19 @@ mongoose
   app.use("/api/conversations", conversationRoute);
   app.use("/api/messages",messageRoute)
 
-  const storage=multer.diskStorage({
-    destination:(req,file,cb)=>{
-      cb(null,"public/images")
+  const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: "socialmedia", // You can name this folder whatever you want in Cloudinary
+      public_id: (req, file) => req.body.name, // Use the name from the request body
     },
-    filename:(req,file,cb)=>{
-      cb(null,req.body.name)
-    }
-  })
+  });
 
-  const upload=multer({storage})
-  app.post("/api/upload",upload.single("file"),async (req,res)=>{
+  const upload=multer({storage: storage})
+  app.post("/api/upload",upload.single("file"),(req,res)=>{
     try{
-      return res.status(200).json("File uploaded successfully")
+      // req.file.path contains the URL of the uploaded image on Cloudinary
+      return res.status(200).json({message: "File uploaded successfully", url: req.file.path})
     }catch(e){
       console.log(e)
       return res.status(500).json("Upload failed");
