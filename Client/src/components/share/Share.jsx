@@ -33,7 +33,7 @@ export default function Share() {
 
       try {
         // 1. Upload the file to your /api/upload endpoint
-        const res = await axios.post(client_server + "/api/upload", data);
+        const res = await axios.post(client_server + "api/upload", data);
 
         // 2. Get the full image URL from the API response
         newPost.img = res.data.url;
@@ -50,7 +50,7 @@ export default function Share() {
 
     try {
       // 3. Create the new post, now with the full Cloudinary URL in the 'img' field
-      await axios.post(client_server + "/api/posts", newPost);
+      await axios.post(client_server + "api/posts", newPost);
       // Refresh to see the new post
       window.location.reload();
     } catch (err) {
