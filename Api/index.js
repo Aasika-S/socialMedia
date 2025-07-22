@@ -34,6 +34,15 @@ mongoose
   .then(() => console.log("connected to DB"))
   .catch((e) => console.log(e));
 
+  app.use(
+    "/images",
+    cors({
+      origin: process.env.REACT_APP_MAIN_SERVER,
+      credentials: true,
+    }),
+    express.static(path.join(__dirname, "public/images"))
+  );
+  
   //middleware
   app.use(express.json())
   app.use(helmet());
