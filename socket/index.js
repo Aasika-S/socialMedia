@@ -37,12 +37,13 @@ io.on("connection",(socket)=>{
     //send and get message
     socket.on("sendMessage",({senderId,receiverId,text})=>{
         const user = getUser(receiverId);
-        //find receiver and send msg to them
-        io.to(user.socketId).emit("getMessage",{
-            senderId,
-            text,
-        });
-
+        // If the user is found (i.e., online), send them the message in real-time.
+        if (user) {
+            io.to(user.socketId).emit("getMessage",{
+                senderId,
+                text,
+            });
+        }
     })
 
 
