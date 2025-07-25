@@ -21,7 +21,7 @@ export default function Topbar() {
     <div className="topbarContainer">
       <div className="topbarLeft">
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          <span className="logo">LamaSocial</span>
+          <span className="logo">B'daySocial</span>
         </Link>
       </div>
       <div className="topbarCenter">

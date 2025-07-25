@@ -23,9 +23,9 @@ export default function Login(){
     <div className="login">
       <div className="loginwrap">
         <div className="loginleft">
-          <h3 className="loginlogo">Lamasocial</h3>
+          <h3 className="loginlogo">B'daySocial</h3>
           <span className="logindesc">
-            Connect with friends and the world around you on Lamasocial
+            Connect with friends and the world around you on B'daySocial
           </span>
         </div>
         <div className="loginright">

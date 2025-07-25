@@ -1,74 +1,154 @@
-.login{
-    width: 100vw;
-    height: 100vh;
-    background-color: #f0f2f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+
+.login {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to right top,
+    #65dfc9,
+    #6cdbeb
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.loginwrap{
-    width: 70%;
-    height: 70%;
-    display: flex;
+.login::before {
+    content: '🎉';
+    position: absolute;
+    top: -10%;
+    left: -5%;
+    font-size: 20rem;
+    opacity: 0.1;
+    transform: rotate(-30deg);
+    z-index: 0;
 }
-.loginleft,.loginright{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+.login::after {
+    content: '🎂';
+    position: absolute;
+    bottom: -15%;
+    right: -5%;
+    font-size: 25rem;
+    opacity: 0.1;
+    transform: rotate(20deg);
+    z-index: 0;
 }
-.loginlogo{
-    font-size: 50px;
-    font-weight: 800px;
-    color: #1775ee;
-    margin-bottom: 10px;
+
+
+.loginwrap {
+  width: 70%;
+  height: 70%;
+  display: flex;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 }
-.logindesc{
-    font-size: 24px;
+
+.loginleft,
+.loginright {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
 }
-.loginbox{
-    height: 400px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.logininput{
-    height: 50px;
-    border-radius:10px;
-    border:1px solid gray;
-    font-size:18px;
-    padding-left:20px;
-}
-.loginbutton:focus{
-    outline: none;
-}
-.loginbutton{
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background-color: #1775ee;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
-}
-.loginforgot{
+
+.loginleft {
+    align-items: center;
     text-align: center;
-    color: #1775ee;
 }
-.loginregisterbutton{
-    width: 100%;
-    align-self: center;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background-color: #42b72a;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
+
+.loginlogo {
+  font-family: 'Pacifico', cursive;
+  font-size: 60px;
+  font-weight: 800;
+  color: #ff6b6b; /* A nice coral pink */
+  margin-bottom: 10px;
+}
+
+.logindesc {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  color: #495057;
+}
+
+.loginbox {
+  height: auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #dee2e6;
+}
+
+.logininput {
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  font-size: 18px;
+  padding-left: 20px;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logininput:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.25);
+}
+
+.loginbutton {
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ff6b6b;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.loginbutton:hover {
+    background-color: #e55a5a;
+}
+
+.loginbutton:disabled{
+  cursor: not-allowed;
+  background-color: #ffbaba;
+}
+
+.loginforgot {
+  text-align: center;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 10px;
+}
+
+.loginregisterbutton {
+  width: 60%;
+  align-self: center;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4ecdc4; /* A nice teal */
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.loginregisterbutton:hover {
+    background-color: #45b8af;
 }
