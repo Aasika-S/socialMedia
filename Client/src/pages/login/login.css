@@ -152,3 +152,10 @@
 .loginregisterbutton:hover {
     background-color: #45b8af;
 }
+
+.loginbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
