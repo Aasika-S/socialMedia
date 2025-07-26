@@ -47,12 +47,12 @@ mongoose
   app.use(express.json())
   app.use(helmet());
   app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-  app.use(cors(
-    {
-      origin:process.env.REACT_APP_MAIN_SERVER,
-      credentials:true
-    }
-  ))
+  app.use(
+    cors({
+      origin: [process.env.REACT_APP_MAIN_SERVER, "http://localhost:3000"],
+      credentials: true,
+    })
+  );
   app.use(morgan("common"))
   app.use("/api/users",userRoute)
   app.use("/api/auth",authRoute)

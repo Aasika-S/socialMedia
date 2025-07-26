@@ -5,7 +5,7 @@ dotenv.config()
 const PORT = process.env.REACT_APP_SOCKET_PORT || 8900;
 const io = new Server(PORT, {
   cors: {
-    origin: process.env.REACT_APP_MAIN_SERVER,
+    origin: [process.env.REACT_APP_MAIN_SERVER, "http://localhost:3000"],
   },
 });
 
