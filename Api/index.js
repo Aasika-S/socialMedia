@@ -37,7 +37,7 @@ mongoose
   app.use(
     "/images",
     cors({
-      origin: process.env.REACT_APP_MAIN_SERVER,
+      origin: [process.env.REACT_APP_MAIN_SERVER, 'http://localhost:3000'],
       credentials: true,
     }),
     express.static(path.join(__dirname, "public/images"))
