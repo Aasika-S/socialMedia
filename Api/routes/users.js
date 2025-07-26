@@ -46,25 +46,27 @@ router.put("/:id/",async (req,res)=>{
  });
 
 //get user
-router.get("/", async (req, res) =>{
-  const userId=req.query.userId
-  const username=req.query.username
+//get user
+router.get("/", async (req, res) => {
+  const userId = req.query.userId;
+  const username = req.query.username;
 
-    try{
-        const user = userId
-          ? await User.findById(userId)
-          : await User.findOne({ username: username });
-        
-        if (!user) {
-          return res.status(404).json("User not found");
-        }
+  try {
+    const user = userId
+      ? await User.findById(userId)
+      : await User.findOne({ username: username });
 
-        const {password,updatedAt, ...other}=user._doc //doc carries all obj
-        res.status(200).json(other)
-    }catch(err){
-        res.status(500).json(err);
+    if (!user) {
+      console.log(user,"User not found")
+      return res.status(200).json(null); 
     }
-})
+
+    const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(other);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //get All users
 router.get("/all", async (req,res)=>{
