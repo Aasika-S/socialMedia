@@ -14,15 +14,26 @@ export default function Chatonline({onlineUsers=[],currentId,setCurrentChat}) {
 
 
 
-  useEffect(()=>{
-    const getFriends= async ()=>{
-      const res=await fetch(client_server+"api/users/friends/"+currentId)
-      const data=await res.json()
-      console.log("DATAAAAAAAAA",data)
-      setFriends(data)
-    }
-    getFriends()
-  },[currentId])
+  useEffect(() => {
+    const getFriends = async () => {
+      if (!currentId) {
+        setFriends([]);
+        return;
+      }
+      try {
+        const res = await fetch(`${client_server}api/users/friends/${currentId}`);
+        if (!res.ok) {
+          throw new Error(`Server responded with status: ${res.status}`);
+        }
+        const data = await res.json();
+        setFriends(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error('Error fetching friends for Chatonline:', err);
+        setFriends([]); // Set to empty array on error to prevent .map crash
+      }
+    };
+    getFriends();
+  }, [currentId, client_server]);
 
   useEffect(()=>{
     if (friends && onlineUsers) {
@@ -48,7 +59,7 @@ export default function Chatonline({onlineUsers=[],currentId,setCurrentChat}) {
   return (
     <div className="chatonline">
       {friends.map((o) => (
-        <div className="chatonlinefriend" onClick={()=>handleClick(o)}>
+        <div className="chatonlinefriend" onClick={() => handleClick(o)} key={o?._id}>
           <div className="chatonlineimgcont">
             <img src={o?.profilepic?PF+o?.profilepic:PF+"people/noprofile.png"} alt="" className="chatonlineimg" />
             <div className="chatonlinebadge"></div>

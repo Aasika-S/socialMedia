@@ -18,6 +18,7 @@ router.put("/:id/",async (req,res)=>{
             const user=await User.findByIdAndUpdate(req.params.id,{
                 $set:req.body,
             })
+            if (!user) return res.status(404).json("User not found");
             res.status(200).json("Account updated")
         }
         catch(e){
@@ -33,7 +34,8 @@ router.put("/:id/",async (req,res)=>{
  router.delete("/:id/", async (req, res) => {
    if (req.body.userId == req.params.id || req.body.isAdmin) {
      try {
-       const user = await User.findByIdAndDelete({_id:req.params.id});
+       const user = await User.findByIdAndDelete(req.params.id);
+       if (!user) return res.status(404).json("User not found");
        res.status(200).json("Account deleted successfully");
      } catch (e) {
        return res.status(500).json(e);
@@ -49,13 +51,18 @@ router.get("/", async (req, res) =>{
   const username=req.query.username
 
     try{
-        const user= userId? 
-        await User.findById(userId ):
-        await User.findOne({username:username})
+        const user = userId
+          ? await User.findById(userId)
+          : await User.findOne({ username: username });
+        
+        if (!user) {
+          return res.status(404).json("User not found");
+        }
+
         const {password,updatedAt, ...other}=user._doc //doc carries all obj
         res.status(200).json(other)
     }catch(err){
-        res.status(500).json(err)
+        res.status(500).json(err);
     }
 })
 
@@ -79,6 +86,7 @@ router.put("/:id/follow", async (req, res) =>{
         try{
             const user=await User.findById(req.params.id)
             const currUser = await User.findById(req.body.userId);
+            if (!user || !currUser) return res.status(404).json("User not found");
             if(!user.followers.includes(req.body.userId)){
                 await user.updateOne({$push:{followers:req.body.userId}})
                 await currUser.updateOne({$push:{following:req.params.id}})
@@ -100,18 +108,25 @@ router.put("/:id/follow", async (req, res) =>{
 //fetch all followers of a user
 router.get("/friends/:userId", async (req, res) =>{
     try{
-      const user=await User.findById(req.params.userId)
-      const friends=await Promise.all(
+      const user = await User.findById(req.params.userId);
+      if (!user) {
+        return res.status(404).json("User not found");
+      }
+
+      const friends = await Promise.all(
         user.following.map((friendId)=>{
           return User.findById(friendId)
         })
-      )
-      let friendList=[]
-      friends.map((friend)=>{
-        const {_id,username,profilepic}=friend
-        friendList.push({_id,username,profilepic})
-      })
-      res.status(200).json(friendList)
+      );
+
+      let friendList = [];
+      friends.forEach((friend) => {
+        if (friend) { // Check if friend exists before destructuring
+          const { _id, username, profilepic } = friend;
+          friendList.push({ _id, username, profilepic });
+        }
+      });
+      res.status(200).json(friendList);
       
     }catch(e){
         res.status(500).json(e)
@@ -124,6 +139,7 @@ router.put("/:id/unfollow", async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
       const currUser = await User.findById(req.body.userId);
+      if (!user || !currUser) return res.status(404).json("User not found");
       if (user.followers.includes(req.body.userId)) {
         await user.updateOne({ $pull: { followers: req.body.userId } });
         await currUser.updateOne({ $pull: { following: req.params.id } });

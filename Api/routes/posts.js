@@ -19,6 +19,7 @@ router.post("/",async (req,res)=>{
 router.put("/:id", async (req,res)=>{
     try{
         const post=await Post.findById(req.params.id)
+        if (!post) return res.status(404).json("Post not found");
         if(post.userId===req.body.userId){
             await post.updateOne({$set:req.body})
             res.status(200).json("Post updated")
@@ -34,6 +35,7 @@ router.put("/:id", async (req,res)=>{
 router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).json("Post not found");
     if (post.userId === req.body.userId) {
       await post.deleteOne();
       res.status(200).json("Post deleted");
@@ -49,6 +51,7 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id/like", async (req, res)=>{
     try{
         const post=await Post.findById(req.params.id)
+        if (!post) return res.status(404).json("Post not found");
         if(!post.likes.includes(req.body.userId)){
             await post.updateOne({$push:{likes:req.body.userId}})
             res.status(200).json("Post liked")
@@ -67,6 +70,7 @@ router.put("/:id/like", async (req, res)=>{
 router.get("/:id",async (req,res)=>{
     try{
         const post=await Post.findById(req.params.id)
+        if (!post) return res.status(404).json("Post not found");
         res.status(200).json(post)
     }catch(e){
         res.status(500).json(e)
@@ -77,7 +81,8 @@ router.get("/:id",async (req,res)=>{
 //get timeline posts (All posts by an user)
 router.get("/timeline/:userId",async (req,res)=>{
     try{     
-        const currUser=await User.findById(req.params.userId) 
+        const currUser=await User.findById(req.params.userId)
+        if (!currUser) return res.status(404).json("User not found");
         const userPosts=await Post.find({userId:currUser._id})
         const friendPosts= await Promise.all(
             currUser.following.map((friendId)=>{
@@ -85,7 +90,7 @@ router.get("/timeline/:userId",async (req,res)=>{
             }))
             res.status(200).json(userPosts.concat(...friendPosts))
     }catch(e){
-        res.status(500).json("Catch block")
+        res.status(500).json(e)
     }
 })
 
