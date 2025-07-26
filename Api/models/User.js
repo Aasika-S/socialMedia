@@ -43,6 +43,10 @@ const userSchema= new mongoose.Schema({
         type:String,
         max:50,
     },
+    isCelebrity:{
+      type: Boolean,
+      default: false,
+    },
     city:{
         type:String,
         max:50

@@ -75,7 +75,9 @@ export default function Messenger() {
               return res.data;
             })
           );
-          followingDetails = followingDetails.filter(u => u); // Filter out nulls
+          followingDetails = followingDetails.filter(
+            (u) => u && u.isCelebrity === false
+          ); // Filter out nulls
         }
 
         // Fetching details for users who are FOLLOWERS of the current user
@@ -87,7 +89,9 @@ export default function Messenger() {
               return res.data;
             })
           );
-          followerDetails = followerDetails.filter(u => u); // Filter out nulls
+          followerDetails = followerDetails.filter(
+            (u) => u && u.isCelebrity === false
+          ); // Filter out nulls
         }
 
         // Combine and deduplicate
