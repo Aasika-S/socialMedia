@@ -76,7 +76,7 @@ export default function Messenger() {
             })
           );
           followingDetails = followingDetails.filter(
-            (u) => u && u.isCelebrity === false
+            (u) => u && u.isAdmin === false
           ); // Filter out nulls
         }
 
@@ -90,7 +90,7 @@ export default function Messenger() {
             })
           );
           followerDetails = followerDetails.filter(
-            (u) => u && u.isCelebrity === false
+            (u) => u && u.isAdmin === false
           ); // Filter out nulls
         }
 
