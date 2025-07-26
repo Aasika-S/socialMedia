@@ -32,7 +32,7 @@ export default function Message({message,own}) {
           className="msgimg"
           src={
             sender?.profilepic
-              ? PF + sender.profilepic
+              ? sender.profilepic
               : PF + "people/noprofile.png"
           }
           alt=""

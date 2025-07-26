@@ -66,7 +66,7 @@ export default function Share() {
             className="shareprofileimg"
             src={
               user.profilepic
-                ? PF + user.profilepic
+                ? user.profilepic
                 : PF + "people/noprofile.png"
             }
             alt=""

@@ -118,7 +118,7 @@ export default function Rightbar({user}) {
                 <img
                   src={
                     friend.profilepic
-                      ? PF + friend.profilepic
+                      ? friend.profilepic
                       : PF + "people/noprofile.png"
                   }
                   alt=""

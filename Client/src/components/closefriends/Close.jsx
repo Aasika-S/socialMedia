@@ -69,7 +69,7 @@ export default function Close({user}) {
       <div className="nameFollow">
         <img
           src={
-            user.profilepic ? PF + user.profilepic : PF + "people/noprofile.png"
+            user.profilepic ? user.profilepic : PF + "people/noprofile.png"
           }
           alt=""
           className="sidebarfriendImg"

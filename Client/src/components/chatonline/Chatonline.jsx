@@ -61,7 +61,7 @@ export default function Chatonline({onlineUsers=[],currentId,setCurrentChat}) {
       {friends.map((o) => (
         <div className="chatonlinefriend" onClick={() => handleClick(o)} key={o?._id}>
           <div className="chatonlineimgcont">
-            <img src={o?.profilepic?PF+o?.profilepic:PF+"people/noprofile.png"} alt="" className="chatonlineimg" />
+            <img src={o?.profilepic?o?.profilepic:PF+"people/noprofile.png"} alt="" className="chatonlineimg" />
             <div className="chatonlinebadge"></div>
           </div>
           <span className="chatonlinename">{o?.username}</span>

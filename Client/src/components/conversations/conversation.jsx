@@ -30,7 +30,7 @@ useEffect(()=>{
 
   return (
     <div className="conversation">
-      <img className="conversationimg" src={user?.profilepic?PF+user?.profilepic:PF+'people/noprofile.png'} alt="hmm" />
+      <img className="conversationimg" src={user?.profilepic?user?.profilepic:PF+'people/noprofile.png'} alt="hmm" />
       <span className="conversationName">{user?.username || "Loading..."}</span>
     </div>
   );

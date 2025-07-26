@@ -42,7 +42,7 @@ export default function Profile() {
               <img
                 src={
                   user.profilepic
-                    ? PF + user.profilepic
+                    ? user.profilepic
                     : PF + "people/noprofile.png"
                 }
                 alt=""

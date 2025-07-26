@@ -68,7 +68,7 @@ export default function Topbar() {
           <img
             src={
               user.profilepic
-                ? PF + user.profilepic
+                ? user.profilepic
                 : PF + "people/noprofile.png"
             }
             alt=""

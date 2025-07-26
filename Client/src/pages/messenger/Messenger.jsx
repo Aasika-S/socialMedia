@@ -255,7 +255,7 @@ export default function Messenger() {
                   className="messengerSidebarItemImg"
                   src={
                     sidebarUser.profilepic
-                      ? PF + sidebarUser.profilepic
+                      ? sidebarUser.profilepic
                       : PF + "people/noprofile.png"
                   }
                   alt={sidebarUser.username}
